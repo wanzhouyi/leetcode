@@ -43,6 +43,18 @@ class Solution:
                 return True
         return False
 
+    # 方法二，哨兵，60ms
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        flowerbed = [0] + flowerbed + [0]
+        m = len(flowerbed)
+        for i in range(1, m - 1):
+            if 0 < i < m - 1 and flowerbed[i] == 0 and flowerbed[i - 1] == 0 and flowerbed[i + 1] == 0:
+                flowerbed[i] = 1
+                n -= 1
+                if n <= 0:
+                    return True
+        return n == 0
+
 
 if __name__ == '__main__':
     s = Solution()
