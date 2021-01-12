@@ -28,6 +28,15 @@ class Solution:
     def hammingDistance(self, x: int, y: int) -> int:
         return bin(x ^ y).count('1')
 
+    # 方法二，异或+移位，32 ms，92.56%
+    def hammingDistance(self, x: int, y: int) -> int:
+        diff = x ^ y
+        ans = 0
+        while diff:
+            ans += (diff & 1)
+            diff = diff >> 1
+        return ans
+
 
 if __name__ == '__main__':
     s = Solution()
