@@ -31,10 +31,11 @@
 """
 import sys
 
-sys.path.append('../')
-from BinaryTreeHelper import TreeNode
+sys.path.append('..')
+from ..BinaryTreeHelper import TreeNode
 
 
+# from common.BinaryTreeHelper import TreeNode
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         def in_order(root):
@@ -53,5 +54,7 @@ class Solution:
 
 
 if __name__ == '__main__':
+    print(sys.path)
     s = Solution()
     print(s.isValidBST(None))
+
