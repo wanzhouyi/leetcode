@@ -88,6 +88,38 @@ class Solution:
         circles = sum(parent[i] == i for i in range(provinces))
         return circles
 
+    # 方法四，并查集（平衡）
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        n = len(isConnected)
+        ls = list(range(n))
+        rank = [1] * n
+
+        def union(i, j):
+            root_i = find(i)
+            root_j = find(j)
+            if root_i == root_j:
+                return
+            if rank[root_i] < rank[root_j]:
+                root_i, root_j = root_j, root_i
+            ls[root_j] = root_i
+            rank[root_i] += rank[root_j]
+
+        def find(x):
+            if ls[x] == x:
+                return x
+            else:
+                ls[x] = find(ls[x])
+                return ls[x]
+
+        for i in range(n):
+            for j in range(n):
+                if isConnected[i][j] == 1:
+                    union(i, j)
+        for i in range(n):
+            ls[i] = find(i)
+
+        return len(set(ls))
+
 
 if __name__ == '__main__':
     s = Solution()
