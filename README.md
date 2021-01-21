@@ -7,7 +7,8 @@
 
 标杆题：
 
-* 单调栈:84.柱状图中最大的矩形
+* 单调栈：[84.柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)  
+  介绍：[介绍](https://zhuanlan.zhihu.com/p/345730620)
 * 并查集:547.省份数量
 * 滑动窗口:1208.尽可能使字符串相等
 * 前缀和：560.和为K的子数组

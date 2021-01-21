@@ -39,6 +39,9 @@ from typing import List
 
 class Solution:
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        """
+        我们只要遍历每行的高度,用上一题(84)方法(栈)求出最大矩形!
+        """
         if not matrix or not matrix[0]: return 0
         row = len(matrix)
         col = len(matrix[0])
