@@ -120,3 +120,9 @@ class Solution:
                     que.append(it)
 
         return 0
+
+
+if __name__ == '__main__':
+    s = Solution()
+    print(s.ladderLength(beginWord="hit", endWord="cog",
+                         wordList=["hot", "dot", "dog", "lot", "log", "cog"]))
