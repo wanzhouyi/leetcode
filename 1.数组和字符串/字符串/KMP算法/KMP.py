@@ -76,7 +76,7 @@ def KMP(substrS, substrT, next_list):
 
 
 class clsC:
-    # https: // github.com / TheAlgorithms / Python / blob / master / strings / knuth_morris_pratt.py
+    # https://github.com/TheAlgorithms/Python/blob/master/strings/knuth_morris_pratt.py
     @staticmethod
     def get_failure_array(pattern: str) -> List[int]:
         """
