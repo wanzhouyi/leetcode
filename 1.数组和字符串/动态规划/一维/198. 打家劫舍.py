@@ -68,6 +68,18 @@ class Solution:
 
         return dp[size - 1]
 
+    # 增加lru_cache方式
+    def rob(self, nums: List[int]) -> int:
+        from functools import lru_cache
+        @lru_cache
+        def dp(rooms):
+            if not rooms:
+                return 0
+            ans = max(rooms[0] + dp(rooms[2:]), dp(rooms[1:]))
+            return ans
+
+        return dp(tuple(nums))
+
 
 if __name__ == '__main__':
     s = Solution()
