@@ -23,6 +23,9 @@
 
 class Solution:
     def isFlipedString(self, s1: str, s2: str) -> bool:
+        """
+        方法一：遍历整个数组，选择一个索引进行切片和重新连接，判断是否正确结果
+        """
         n1, n2 = len(s1), len(s2)
         if n1 != n2: return False
         if s1 == s2 == "":
@@ -32,7 +35,27 @@ class Solution:
                 return True
         return False
 
+    def isFlipedString(self, s1: str, s2: str) -> bool:
+        """
+        如果首尾一定相连，那么如果把S2的尾巴连上S2的头，那中间应该就是S1
+        """
+        if len(s1) != len(s2):
+            return False
+        new = s2 + s2
+        return s1 in new
 
+    def isFlipedString(self, s1: str, s2: str) -> bool:
+        l1 = len(s1)
+
+        if l1 != len(s2):
+            return False
+
+        # 将s1 + s1 叠加起来， 判断子串。
+        s1s1 = s1 + s1
+        if s1s1.find(s2) != -1:
+            return True
+
+        return False
 if __name__ == '__main__':
     s = Solution()
     print(s.isFlipedString(s1="waterbottle", s2="erbottlewat"))
