@@ -49,7 +49,7 @@ class Solution:
         return ans
 
     def xorQueries(self, arr: List[int], queries: List[List[int]]) -> List[int]:
-        """应用了前缀异或的方法"""
+        """应用了前缀异或的方法, x⊕x=0"""
         pre_arr = [0]
         for num in arr:
             pre_arr.append(pre_arr[-1] ^ num)
