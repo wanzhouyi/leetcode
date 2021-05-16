@@ -48,7 +48,7 @@ x^x=0
    简单来说，就是对一个数异或两次，就能消除这个数引发的影响了。
 
 ~~~python3
-    def decode(self, encoded: List[int], first: int) -> List[int]:
+def decode(self, encoded: list[int], first: int) -> list[int]:
     ans = [first]
     for num in encoded:
         ans.append(ans[-1] ^ num)
@@ -59,6 +59,6 @@ x^x=0
 3.计算汉明距离( [461\. 汉明距离](https://leetcode-cn.com/problems/hamming-distance/))
 
 ~~~python3
-    def hammingDistance(self, x, y):
+def hammingDistance(self, x, y):
     return bin(x ^ y).count('1')
 ~~~
