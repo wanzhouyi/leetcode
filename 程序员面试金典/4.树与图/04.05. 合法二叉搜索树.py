@@ -35,6 +35,7 @@ class Solution:
             return binary_tree_to_arr(node.left) + [node.val] + binary_tree_to_arr(node.right)
 
         arr = binary_tree_to_arr(root)
+
         for idx, num in enumerate(arr):
             if idx == 0:
                 continue
