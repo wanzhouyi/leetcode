@@ -37,10 +37,27 @@ class Solution:
         return res
 
 
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        nums_dict = {}
+        nums_sum = count = 0
+        for num in nums:
+            nums_sum += num
+            if nums_sum == k:
+                count += 1
+            if nums_sum - k in nums_dict:
+                count += nums_dict[nums_sum - k]
+            if nums_sum in nums_dict:
+                nums_dict[nums_sum] += 1
+            else:
+                nums_dict[nums_sum] = 1
+        return count
+
+
 if __name__ == '__main__':
     s = Solution()
-    print(s.subarraySum(nums=[1, 1, 1], k=2))
-    print(s.subarraySum(nums=[1, 1, 1], k=0))
-    print(s.subarraySum(nums=[1, 1, 1], k=1))
+    print(s.subarraySum(nums=[1, 1, 1], k=2))  # 2
+    print(s.subarraySum(nums=[1, 1, 1], k=0))  # 0
+    print(s.subarraySum(nums=[1, 1, 1], k=1))  # 3
     print(s.subarraySum(nums=[0, 0, 0], k=0))
     print(s.subarraySum([-1, -1, 1], 0))
