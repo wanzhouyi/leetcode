@@ -73,6 +73,31 @@ class Solution:
 
 
 class Solution(object):
+    """
+    方法一：二分查找
+    直观的思路肯定是从前往后遍历一遍。用两个变量记录第一次和最后一次遇见target 的下标，
+    但这个方法的时间复杂度为O(n)，没有利用到数组升序排列的条件。
+
+    由于数组已经排序，因此整个数组是单调递增的，我们可以利用二分法来加速查找的过程。
+
+    考虑target 开始和结束位置，其实我们要找的就是数组中「第一个等于target 的位置」（记为leftIdx）
+    和「第一个大于target 的位置减一」（记为rightIdx）。
+
+    二分查找中，寻找leftIdx 即为在数组中寻找第一个大于等于target 的下标，
+    寻找rightIdx 即为在数组中寻找第一个大于 target 的下标，然后将下标减一。
+    两者的判断条件不同，为了代码的复用，我们定义 binarySearch(nums, target, lower)
+    表示在nums 数组中二分查找 target 的位置，如果 lower 为 true，则查找第一个大于等于 target 的下标，
+    否则查找第一个大于 target 的下标。
+
+    最后，因为target 可能不存在数组中，因此我们需要重新校验我们得到的两个下标leftIdx 和 rightIdx，看是否符合条件，
+    如果符合条件就返回 [leftIdx,rightIdx]，不符合就返回 [-1,-1]。
+
+    作者：LeetCode-Solution
+    链接：https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/solution/zai-pai-xu-shu-zu-zhong-cha-zhao-yuan-su-de-di-3-4/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    """
+
     def searchRange(self, nums, target):
         """
         :type nums: List[int]
