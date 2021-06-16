@@ -72,6 +72,34 @@ class Solution:
             return [-1, -1]
 
 
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+
+        def left_func(nums, target):
+            n = len(nums) - 1
+            left = 0
+            right = n
+            while left <= right:
+                mid = (left + right) // 2
+                if nums[mid] >= target:
+                    right = mid - 1
+                if nums[mid] < target:
+                    left = mid + 1
+            return left
+
+        a = left_func(nums, target)
+        b = left_func(nums, target + 1)
+        if a == len(nums) or nums[a] != target:
+            return [-1, -1]
+        else:
+            return [a, b - 1]
+
+
 if __name__ == '__main__':
     s = Solution()
     print(s.searchRange(nums=[5, 7, 7, 8, 8, 10], target=8))
@@ -83,3 +111,4 @@ if __name__ == '__main__':
     # 多元素用例
     print(s.searchRange([2, 2, 2], 1))
     print(s.searchRange([2, 2, 2], 2))
+    print(s.searchRange([2, 2, 2], 3))
