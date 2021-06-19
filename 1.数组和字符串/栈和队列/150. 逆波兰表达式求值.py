@@ -44,6 +44,7 @@ tokens[i] 要么是一个算符（"+"、"-"、"*" 或 "/"），要么是一个�
 链接：https://leetcode-cn.com/problems/evaluate-reverse-polish-notation
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
+from operator import sub, add, mul
 from typing import List
 import math
 
@@ -70,6 +71,29 @@ class Solution:
             else:
                 stack.append(int(str_num))
         return int(stack[0])
+
+
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        op_to_binary_fn = {
+            "+": add,
+            "-": sub,
+            "*": mul,
+            "/": lambda x, y: int(x / y),  # 需要注意 python 中负数除法的表现与题目不一致
+        }
+
+        stack = list()
+        for token in tokens:
+            try:
+                num = int(token)
+            except ValueError:
+                num2 = stack.pop()
+                num1 = stack.pop()
+                num = op_to_binary_fn[token](num1, num2)
+            finally:
+                stack.append(num)
+
+        return stack[0]
 
 
 if __name__ == '__main__':
