@@ -72,6 +72,17 @@ class Solution:
                 return False
         return True
 
+    # 模拟
+    class Solution:
+        def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+            locations = [0] * 1001
+            for num_passengers, start, end in trips:
+                for i in range(start, end):
+                    locations[i] += num_passengers
+                    if locations[i] > capacity:
+                        return False
+            return True
+
 
 if __name__ == '__main__':
     s = Solution()
