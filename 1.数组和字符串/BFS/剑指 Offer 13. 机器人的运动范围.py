@@ -25,31 +25,33 @@
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
 
-
+from functools import lru_cache
 class Solution:
     def movingCount(self, m: int, n: int, k: int) -> int:
+        @lru_cache(None)
         def get_single_num(num):
             ans = 0
-            while num > 10:
+            while num >= 10:
                 num, yushu = divmod(num, 10)
                 ans += yushu
             ans += num
             return ans
 
         visited = set()
-        from collections import deque
-        que = deque([(0, 0)])
+        que = {(0, 0)}
         directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
         while que:
-            node = que.popleft()
-            visited.add(node)
-            for x, y in directions:
-                new_x, new_y = node[0] + x, node[1] + y
-                if 0 <= new_x <= m - 1 \
-                        and 0 <= new_y <= n - 1 \
-                        and get_single_num(new_x) + get_single_num(new_y) <= k \
-                        and (new_x, new_y) not in visited:
-                    que.append((new_x, new_y))
+            temp = que.copy()
+            que.clear()
+            for node in temp:
+                visited.add(node)
+                for x, y in directions:
+                    new_x, new_y = node[0] + x, node[1] + y
+                    if 0 <= new_x <= m - 1 \
+                            and 0 <= new_y <= n - 1 \
+                            and get_single_num(new_x) + get_single_num(new_y) <= k \
+                            and (new_x, new_y) not in visited:
+                        que.add((new_x, new_y))
         return len(visited)
 
 
@@ -58,4 +60,6 @@ if __name__ == '__main__':
     # print(s.movingCount(m=2, n=3, k=1))
     # print(s.movingCount(m=2, n=3, k=0))
     # print(s.movingCount(m=3, n=1, k=0))
-    print(s.movingCount(3, 2, 17))
+    # print(s.movingCount(3, 2, 17))
+    print(s.movingCount(100, 100, 20))
+    print(s.movingCount(1, 1, 0))
