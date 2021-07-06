@@ -36,7 +36,36 @@ wordList 中的所有字符串 互不相同
 """
 import collections
 from typing import List
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        wordList_new = [beginWord] + wordList
+        n = len(beginWord)
+        m = len(wordList_new)
+        dic = collections.defaultdict(set)
+        for i in range(n):
+            wordList_new_rep = list(
+                map(lambda x: '{}{}{}'.format(x[:i], '*', x[i + 1:]), wordList_new))
+            # print(wordList_new_rep)
+            for j in range(m):
+                for k in range(j + 1, m):
+                    if wordList_new_rep[j] == wordList_new_rep[k]:
+                        dic[wordList_new[j]].add(wordList_new[k])
+                        dic[wordList_new[k]].add(wordList_new[j])
 
+        # print(dic)
+        stack = {beginWord}
+        visited = set()
+        cnt = 0
+        while stack:
+            cnt += 1
+            shadow_stack = stack.copy()
+            stack.clear()
+            for word in shadow_stack:
+                if word == endWord:
+                    return cnt
+                visited.add(word)
+                stack.update(dic[word] - visited)
+        return 0
 
 class Solution:
     # 官解方法一：广度优先搜索 + 优化建图
