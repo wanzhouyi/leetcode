@@ -198,3 +198,47 @@ class Solution:
                             result += ds_count[d] * ds_count[p - d]
 
         return result % 1000000007
+
+
+from collections import defaultdict, Counter
+
+
+class Solution:
+    def countPairs(self, deliciousness: List[int]) -> int:
+        # 1. 引入Counter库
+        ds_count = dict(Counter(deliciousness))
+
+        # 2. 引入最大、最小的值，限制pows数组的大小
+        min_d, max_d = 1 << 21, 0
+        for d in deliciousness:
+            if d < min_d:
+                min_d = d
+
+            if d > max_d:
+                max_d = d
+
+        # 3. 乘法替换为位操作，乘以2替换为左移一位
+        min_d, max_d = min_d << 1, max_d << 1
+
+        pows = []
+        tmp = 1
+        for i in range(22):
+            if tmp << i < min_d:
+                continue
+            if tmp << i > max_d:
+                break
+            pows.append(tmp << i)
+
+        # 4. 相同的数和不同的数分别计算，不同的数最后除以2，避免字符串拼接和集合visited操作
+        same_result = 0
+        diff_result = 0
+        for d, count in ds_count.items():
+            for p in pows:
+                if p - d in ds_count:
+                    if p - d == d:
+                        # 3. 乘法替换为位操作，除以二替换为右移一位
+                        same_result += count * (count - 1) >> 1
+                    else:
+                        diff_result += ds_count[d] * ds_count[p - d]
+
+        return (same_result + (diff_result >> 1)) % 1000000007
