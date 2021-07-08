@@ -58,3 +58,39 @@ class Solution:
             if sum >= k:
                 res += prefix_cnt[sum - k]
         return res
+
+
+class Solution:
+    """
+    这个题应该是比较标准的数组前缀和的题，560. 和为K的子数组很像，但应该还要简单一点。
+    题解参考560. 和为K的子数组 前缀和
+    需要注意的是，这道题的前缀和是单调不减的，建哈希表更简单，初始化{0：1}表示什么数都不选已经有一种无奇数情况了。
+
+    作者：zxnian_ustc
+    链接：https://leetcode-cn.com/problems/count-number-of-nice-subarrays/solution/1248-tong-ji-you-mei-zi-shu-zu-qian-zhui-9o2p/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    """
+
+    def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+        nums_new = list(map(lambda x: 0 if x % 2 == 0 else 1, nums))
+        pre_sum = 0
+        dic = {0: 1}
+        ans = 0
+        for num in nums_new:
+            temp_sum = pre_sum + num
+            if dic.get(temp_sum):
+                dic[temp_sum] += 1
+            else:
+                dic[temp_sum] = 1
+            pre_sum = temp_sum
+
+            if dic.get(temp_sum - k):
+                ans += dic[temp_sum - k]
+        return ans
+
+
+if __name__ == '__main__':
+    s = Solution()
+    print(s.numberOfSubarrays(nums=[1, 1, 2, 1, 1], k=3))
+    print(s.numberOfSubarrays(nums=[2, 4, 6], k=1))
