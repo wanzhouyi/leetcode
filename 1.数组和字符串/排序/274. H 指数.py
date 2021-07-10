@@ -29,6 +29,31 @@ class Solution:
         return ans
 
 
+class Solution:
+    """
+    首先我们可以将初始的H 指数 h 设为 0，然后将引用次数排序，并且对排序后的数组从大到小遍历。
+
+    根据H 指数的定义，如果当前H 指数为 h 并且在遍历过程中找到当前值 citations[i]>h，
+    则说明我们找到了一篇被引用了至少 h+1 次的论文，所以将现有的 h 值加 1。继续遍历直到 h 无法继续增大。
+    最后返回 h 作为最终答案。
+
+    作者：LeetCode-Solution
+    链接：https://leetcode-cn.com/problems/h-index/solution/h-zhi-shu-by-leetcode-solution-fnhl/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    """
+
+    def hIndex(self, citations: List[int]) -> int:
+        sorted_citation = sorted(citations, reverse=True)
+        h = 0
+        i = 0
+        n = len(citations)
+        while i < n and sorted_citation[i] > h:
+            h += 1
+            i += 1
+        return h
+
+
 if __name__ == '__main__':
     s = Solution()
     print(s.hIndex([3, 0, 6, 1, 5]))
