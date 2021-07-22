@@ -61,6 +61,24 @@ class Solution:
 
     # 差分
     def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        """
+        差分统计每个站点的频次
+        1.一个数组f记录每个点的变化，初始化为0
+        2.遍历trips数组
+        对于一个 （人数，上车点，下车点）
+        f[上车点] += 人数
+        f[下车点] -= 人数
+        3.整理
+        f[i] 是在f[i-1]的基础上，
+        在f[i-1]是在i-1这个点，车上有几个人 f[i]是记录i点的增减的人数
+        f[i-1] + f[i] 是此时i点的人数 赋给f[i]
+        4.时时比较每个点（i）车上的人数，是否超过了capacity
+
+        作者：Hanxin_Hanxin
+        链接：https://leetcode-cn.com/problems/car-pooling/solution/c-python3-chao-ji-qing-xi-jian-ji-chai-f-xaid/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        """
         n = len(trips)
         curAns = [0] * 1001
         for i in range(n):
