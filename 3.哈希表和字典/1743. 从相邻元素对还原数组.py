@@ -39,6 +39,7 @@ adjacentPairs[i].length == 2
 链接：https://leetcode-cn.com/problems/restore-the-array-from-adjacent-pairs
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
+import collections
 from collections import defaultdict
 from typing import List
 
@@ -65,6 +66,22 @@ class Solution:
                 break
         print(ans)
 
+
+class Solution:
+    def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
+        dic = collections.defaultdict(list)
+        n = len(adjacentPairs) + 1
+        for x, y in adjacentPairs:
+            dic[x].append(y)
+            dic[y].append(x)
+        head = [k for k, v in dic.items() if len(v) == 1]
+        res = [head[0]]
+        while len(res) < n:
+            i = res[-1]
+            j = dic[i].pop()
+            dic[j].remove(i)
+            res.append(j)
+        return res
 
 if __name__ == '__main__':
     s = Solution()
