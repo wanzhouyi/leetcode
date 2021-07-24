@@ -25,10 +25,39 @@ n == matrix[i].length
 链接：https://leetcode-cn.com/problems/search-a-2d-matrix-ii
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
+import bisect
 from typing import List
 
 
 class Solution:
+    # 数据量小，暴力解法可通过，84.97%
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m, n = len(matrix), len(matrix[0])
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == target:
+                    return True
+        return False
+
+    # 数据量小，用集合也可行，94.12%
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m = len(matrix)
+        s = set()
+        for i in range(m):
+            s.update(matrix[i])
+        return True if target in s else False
+
+    # 一次二分查找，98.65%
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m, n = len(matrix), len(matrix[0])
+        for i in range(m):
+            idx = bisect.bisect_left(matrix[i], target)
+            if idx == n:
+                continue
+            if matrix[i][idx] == target:
+                return True
+        return False
+
     # 方法一，模拟，2164ms，5.77%
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         m, n = len(matrix), len(matrix[0])
@@ -93,6 +122,29 @@ class Solution:
             else:  # found it
                 return True
 
+        return False
+
+    # 其它解--BST
+    def searchMatrix(matrix: List[List[int]], target: int) -> bool:
+        """
+        双指针
+        从左下角来看是一个二叉搜索树 matrix[i−1][j]≤matrix[i][j]≤matrix[i][j+1]
+        从左下角开搜 直到到达边缘
+
+        作者：yuer-flyfly
+        链接：https://leetcode-cn.com/problems/search-a-2d-matrix-ii/solution/sou-suo-er-wei-ju-zhen-ii-python-by-yuer-vaqx/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        """
+        m, n = len(matrix), len(matrix[0])
+        i, j = m - 1, 0  # 起始点为左下角
+        while i >= 0 and j < n:
+            if matrix[i][j] == target:
+                return True
+            elif matrix[i][j] < target:
+                j += 1
+            elif matrix[i][j] > target:
+                i -= 1
         return False
 
 
