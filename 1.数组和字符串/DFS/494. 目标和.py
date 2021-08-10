@@ -134,12 +134,12 @@ class Solution:
 if __name__ == '__main__':
     s = Solution()
     print(s.findTargetSumWays(nums=[1, 1, 1, 1, 1], target=3))  # 5
-    print(s.findTargetSumWays(nums=[1], target=1))  # 1
-    print(s.findTargetSumWays(
-        [6, 44, 30, 25, 8, 26, 34, 22, 10, 18, 34, 8, 0, 32, 13, 48, 29, 41, 16, 30], 12))
-    print(s.findTargetSumWays(
-        [10, 34, 28, 5, 10, 26, 9, 17, 28, 10, 9, 6, 10, 15, 0, 28, 42, 39, 25, 19], 26))
-    print(s.findTargetSumWays(
-        [42, 1, 42, 35, 33, 37, 26, 3, 23, 29, 22, 50, 34, 31, 11, 28, 20, 31, 32, 28], 2))
-    print(s.findTargetSumWays(
-        [11, 31, 37, 36, 43, 40, 50, 18, 10, 15, 10, 35, 43, 25, 41, 43, 6, 22, 38, 38], 44))
+    # print(s.findTargetSumWays(nums=[1], target=1))  # 1
+    # print(s.findTargetSumWays(
+    #     [6, 44, 30, 25, 8, 26, 34, 22, 10, 18, 34, 8, 0, 32, 13, 48, 29, 41, 16, 30], 12))
+    # print(s.findTargetSumWays(
+    #     [10, 34, 28, 5, 10, 26, 9, 17, 28, 10, 9, 6, 10, 15, 0, 28, 42, 39, 25, 19], 26))
+    # print(s.findTargetSumWays(
+    #     [42, 1, 42, 35, 33, 37, 26, 3, 23, 29, 22, 50, 34, 31, 11, 28, 20, 31, 32, 28], 2))
+    # print(s.findTargetSumWays(
+    #     [11, 31, 37, 36, 43, 40, 50, 18, 10, 15, 10, 35, 43, 25, 41, 43, 6, 22, 38, 38], 44))
